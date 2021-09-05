@@ -1,23 +1,48 @@
-import logo from './logo.svg';
+import React, { useState }from 'react';
 import './App.css';
+import './index.css';
+import SearchBar from './components/SearchBar';
+import Location from './components/Location';
+import Dates from './components/Dates';
+import Weather from './components/Weather';
+
+const api = {
+  key: '61b4403b5a0e0bb697b66f53ab78211c',
+  base: 'https://api.openweathermap.org/data/2.5/'
+}
+
+
 
 function App() {
+
+  let query = '';
+  const [weather, setWeather] = useState({});
+
+  const search = (updatedQuery) => {
+    query = updatedQuery;
+    console.log(query);
+    fetch(`${api.base}weather?q=${query}&units=metric&APPID=${api.key}`)
+      .then(res => res.json())
+      .then(result => setWeather(result))
+  }
+
+  
+ 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <SearchBar 
+        inputType="text" 
+        buttonType="submit" 
+        value={query}
+        onSearch={search} 
+      />
+      {typeof weather.main != 'undefined' ? (
+        <div>
+          <Location>{weather.name}, {weather.sys.country}</Location>
+          <Dates>{new Date().toDateString()}</Dates>
+          <Weather temp={`${Math.round(weather.main.temp)}°C`} climate={weather.weather[0].main}></Weather>
+        </div>
+      ): ('')}
     </div>
   );
 }
