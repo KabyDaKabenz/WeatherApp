@@ -16,20 +16,39 @@ const api = {
 function App() {
 
   let query = '';
+  let climate = 'default';
   const [weather, setWeather] = useState({});
 
   const search = (updatedQuery) => {
     query = updatedQuery;
-    console.log(query);
     fetch(`${api.base}weather?q=${query}&units=metric&APPID=${api.key}`)
       .then(res => res.json())
       .then(result => setWeather(result))
+    
+      
+    
   }
+
+  if(weather.main) {
+    
+    let weatherTemp = Math.round(weather.main.temp);
+    console.log(weatherTemp)
+    if(weatherTemp < -5) {
+      climate += ' very-cold';
+    } else if (weatherTemp >= -5 && weatherTemp < 15) {
+      climate += ' cold';
+     } else if(weatherTemp >= 15 && weatherTemp < 30) {
+      climate += ' warm';
+    } else {
+      climate += ' very-warm';
+    }
+    
+}
 
   
  
   return (
-    <div className="app">
+    <div className={climate}>
       <SearchBar 
         inputType="text" 
         buttonType="submit" 
