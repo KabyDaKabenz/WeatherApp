@@ -8,8 +8,9 @@
 
 body {
   background-color: rgba(0, 0, 0, 0.85);
+  font-family: 'Open Sans', sans-serif;
+  
 }
-
 
 .default {
   background-image: url('./assets/default.jpg');
@@ -17,9 +18,8 @@ body {
   width: 100%;
   max-width: 70rem;
   margin: 3rem auto;
-  height: 90vh;
+  min-height: 90vh;
   border-radius: 10px;
-  font-family: 'Open Sans', sans-serif;
   transition: 0.4s ease-out;
 }
 
@@ -37,4 +37,11 @@ body {
 
 .default.very-cold{
   background-image: url('./assets/very-cold.jpg');
+}
+
+
+@media (max-width: 900px) {
+  .default {
+    border-radius: 0;
+  }
 }
