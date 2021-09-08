@@ -3,7 +3,7 @@ import './App.css';
 import './index.css';
 import SearchBar from './components/SearchBar';
 import Location from './components/Location';
-import Dates from './components/Dates';
+import Time from './components/Time';
 import Weather from './components/Weather';
 
 const api = {
@@ -27,9 +27,8 @@ function App() {
   }
 
   if(weather.main) {
-    
+    console.log(weather)
     let weatherTemp = Math.round(weather.main.temp);
-    console.log(weatherTemp)
     if(weatherTemp < -5) {
       climate += ' very-cold';
     } else if (weatherTemp >= -5 && weatherTemp < 15) {
@@ -52,8 +51,12 @@ function App() {
       {typeof weather.main != 'undefined' ? (
         <div>
           <Location>{weather.name}, {weather.sys.country}</Location>
-          <Dates>{new Date().toDateString()}</Dates>
-          <Weather temp={`${Math.round(weather.main.temp)}°C`} climate={weather.weather[0].main}></Weather>
+          <Time>{new Date().toDateString()}</Time>
+          <Weather 
+            temp={`${Math.round(weather.main.temp)}°C`} 
+            climate={weather.weather[0].main}
+            windspeed={`Wind: ${weather.wind.speed} m/s`}
+          />
         </div>
       ): ('')}
     </div>

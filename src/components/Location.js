@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './LocationAndDate.module.css';
+import styles from './LocationAndTime.module.css';
 
 const Location = (props) => {
     return (
