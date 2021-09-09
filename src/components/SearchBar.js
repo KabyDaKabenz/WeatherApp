@@ -18,7 +18,7 @@ const SearchBar = (props) => {
 
     return(
         <form className={styles.form} onSubmit={submitHandler}>
-            <input type={props.inputType} value={query} onChange={queryChangeHandler} placeholder="Montreal, Quebec"/>
+            <input type={props.inputType} value={query} onChange={queryChangeHandler} placeholder="e.g. Montreal, Quebec"/>
             <button type={props.buttonType}>Search</button>
         </form>
     );

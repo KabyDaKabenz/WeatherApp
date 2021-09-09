@@ -48,7 +48,7 @@ function App() {
         value={query}
         onSearch={search} 
       />
-      {typeof weather.main != 'undefined' ? (
+      {weather.main ? (
         <div>
           <Location>{weather.name}, {weather.sys.country}</Location>
           <Time>{new Date().toDateString()}</Time>
